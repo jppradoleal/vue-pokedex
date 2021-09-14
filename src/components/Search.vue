@@ -1,7 +1,7 @@
 <template>
   <section class="search">
     <input type="text" v-model="searchValue" id="search" @blur="$emit('do-search', searchValue)">
-    <button @click="$emit('do-search', searchValue)">Buscar</button>
+    <button>Buscar</button>
   </section>
 </template>
 
@@ -20,8 +20,7 @@ export default {
   .search {
     display: flex;
     flex-direction: row;
-    margin: 64px auto 16px;
-    max-width: 260px;
+    margin: 0 0 16px 0;
     
     button {
       padding: 5px 25px;

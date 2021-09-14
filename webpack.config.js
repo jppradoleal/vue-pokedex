@@ -26,8 +26,15 @@ module.exports = {
         use: 'babel-loader'
       },
       {
-        test: /\.(sa|c)ss/,
-        use: ['style-loader', 'css-loader', 'sass-loader']
+        test: /\.(sa|c|sc)ss/,
+        use: ['style-loader', 'css-loader', {
+          loader: 'sass-loader',
+          options: {
+           sassOptions: {
+            indentedSyntax: false,
+           }
+          }
+        }]
       }
     ]
   },

@@ -16,12 +16,12 @@ import _ from 'lodash'
 
 export default {
   name: 'pokemon-card',
-  props: [
-    'pokemon'
-  ],
   computed: {
+    pokemon: function() {
+      return this.$store.state.pokemon
+    },
     show: function() {
-      return !_.isEmpty(this.pokemon)       
+      return !_.isEmpty(this.$store.state.pokemon)       
     }
   }
 }
@@ -33,7 +33,6 @@ export default {
     flex-direction: column;
     max-width: 310px;
     align-items: center;
-    margin: 0 auto;
 
     background-color: #222;
     padding: 25px;
