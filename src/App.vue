@@ -16,21 +16,31 @@ export default {
     PokemonCard,
     SearchBox,
   },
-  data: function () {
+  data: function() {
     return {
-      pokemon: {
-        image: "https://via.placeholder.com/128",
-        name: "Pikachu",
-        statuses: [
-          { name: "HP", value: "500" },
-          { name: "SP", value: "1500" },
-        ],
-      },
-    };
+      pokemon: {}
+    }
   },
   methods: {
-    doSearch: function(event) {
-      console.log(event)
+    doSearch: async function(pokemonName) {
+      let rawPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+      
+      let pokemonStats = rawPokemon['stats'].map((stat) => {
+          return {
+            name: stat["stat"]["name"],
+            value: stats["base_stat"]
+          }
+      })
+      
+      this.pokemon = {
+        name: rawPokemon["name"],
+        height: rawPokemon['height'],
+        weight: rawPokemon['weight'],
+        statuses: pokemonStats,
+        image: rawPokemon['sprites']['front_default'] 
+      }
+
+      console.log(this.pokemon)
     }
   }
 };

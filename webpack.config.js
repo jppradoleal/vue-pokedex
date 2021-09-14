@@ -5,6 +5,9 @@ const { VueLoaderPlugin } = require('vue-loader')
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
+  devServer: {
+    allowedHosts: 'all',
+  },
   entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
