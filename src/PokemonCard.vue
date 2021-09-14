@@ -17,6 +17,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="sass">
+  ul {
+    list-style: none;
+    padding: 0;
+  }
 </style>

@@ -3,12 +3,14 @@
     <h1>Hello World</h1>
     <search-box @do-search="doSearch($event)"/>
     <pokemon-card :pokemon="pokemon" />
+    <small v-if="error">Pokemon não encontrado</small>
   </div>
 </template>
 
 <script>
-import PokemonCard from "./PokemonCard.vue";
-import SearchBox from './Search.vue';
+import PokemonCard from "./PokemonCard.vue"
+import SearchBox from './Search.vue'
+import _ from 'lodash'
 
 export default {
   name: "App",
@@ -18,29 +20,38 @@ export default {
   },
   data: function() {
     return {
-      pokemon: {}
+      pokemon: {},
+      error: false
     }
   },
   methods: {
     doSearch: async function(pokemonName) {
-      let rawPokemon = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
-      
+      pokemonName = pokemonName.toLowerCase()
+      let response;
+      let rawPokemon;
+      try {
+        response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)
+        rawPokemon = await response.json()
+        this.error = false
+      } catch (e) {
+        this.error = true
+        return;
+      }
+
       let pokemonStats = rawPokemon['stats'].map((stat) => {
           return {
-            name: stat["stat"]["name"],
-            value: stats["base_stat"]
+            name: _.upperFirst(stat["stat"]["name"]),
+            value: stat["base_stat"]
           }
       })
       
       this.pokemon = {
-        name: rawPokemon["name"],
+        name: _.upperFirst(rawPokemon["name"]),
         height: rawPokemon['height'],
         weight: rawPokemon['weight'],
         statuses: pokemonStats,
         image: rawPokemon['sprites']['front_default'] 
       }
-
-      console.log(this.pokemon)
     }
   }
 };
