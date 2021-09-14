@@ -1,5 +1,5 @@
 <template>
-  <section v-if="!!pokemon" class="card">
+  <section v-if="show" class="card">
     <img :src="pokemon.image"/>
     <h2>{{pokemon.name}}</h2>
     <div class="badges">
@@ -12,11 +12,18 @@
 </template>
 
 <script>
+import _ from 'lodash'
+
 export default {
   name: 'pokemon-card',
   props: [
     'pokemon'
-  ]
+  ],
+  computed: {
+    show: function() {
+      return !_.isEmpty(this.pokemon)       
+    }
+  }
 }
 </script>
 
