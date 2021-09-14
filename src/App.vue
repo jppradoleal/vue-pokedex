@@ -1,8 +1,7 @@
 <template>
-  <div>
-    <h1>Hello World</h1>
+  <div class="wrapper">
     <search-box @do-search="doSearch($event)"/>
-    <pokemon-card :pokemon="pokemon" />
+    <pokemon-card :pokemon="pokemon"/>
     <small v-if="error">Pokemon não encontrado</small>
   </div>
 </template>
@@ -35,6 +34,7 @@ export default {
         this.error = false
       } catch (e) {
         this.error = true
+        this.pokemon = {}
         return;
       }
 
@@ -44,18 +44,30 @@ export default {
             value: stat["base_stat"]
           }
       })
+
+      let pokemonTypes = rawPokemon['types'].map((type) => {
+        return {
+          id: type['slot'],
+          name: _.upperFirst(type['type']['name']),
+        }
+      })
       
       this.pokemon = {
         name: _.upperFirst(rawPokemon["name"]),
         height: rawPokemon['height'],
         weight: rawPokemon['weight'],
         statuses: pokemonStats,
-        image: rawPokemon['sprites']['front_default'] 
+        image: rawPokemon['sprites']['front_default'],
+        types: pokemonTypes 
       }
     }
   }
 };
 </script>
 
-<style>
+<style lang="sass">
+  .wrapper {
+    width: inherit;
+    height: inherit;
+  }
 </style>
