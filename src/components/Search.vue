@@ -5,7 +5,7 @@
       v-model="searchValue" 
       id="search" 
       @blur="doSearch"
-      test-id="search-input"
+      data-testid="search-input"
     >
     <button>Buscar</button>
   </section>
