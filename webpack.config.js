@@ -2,10 +2,8 @@ const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
-const mode = process.env.NODE_ENV || 'development'
-
 module.exports = {
-  mode,
+  mode: 'development',
   devtool: 'eval-source-map',
   devServer: {
     allowedHosts: 'all',

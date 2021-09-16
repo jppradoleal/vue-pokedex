@@ -6,28 +6,34 @@ export default {
         error: false
     },
     mutations: {
-        async getPokemon(state, payload) {
+        setPokemon(state, payload) {
             console.log("Mutation called")
 
-            const pokemonName = payload.pokemonName
-            let pokemon;
+            const pokemon = payload.pokemon
+            const error = payload.error
+            
+            state.pokemon = pokemon
+            state.error = error
+            
+            console.log(state.pokemon)
+        }
+    },
+    actions: {
+        async fetchPokemon({commit}, payload) {
+            let pokemonName = payload.pokemonName
+            let pokemon = {}
+            let error = false
 
-            if(pokemonName == '') {
-                state.pokemon = {}
-                state.error = false
+            if(pokemonName == '')
                 return
-            }
 
             try {
                 pokemon = await api.getPokemon(pokemonName)
-                state.error = false
             } catch(e) {
-                pokemon = {}
-                state.error = true
+                error = true
             }
 
-            state.pokemon = pokemon
-            console.log(state.pokemon)
+            commit('setPokemon', {pokemon, error})
         }
     }
 }

@@ -22,12 +22,6 @@ export default {
       return this.$store.state.error
     }
   },
-  methods: {
-    doSearch: async function(pokemonName) {
-      console.log("Event Called")
-      this.$store.commit('getPokemon', { pokemonName })
-    }
-  }
 };
 </script>
 

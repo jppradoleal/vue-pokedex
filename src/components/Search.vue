@@ -1,6 +1,12 @@
 <template>
   <section class="search">
-    <input type="text" v-model="searchValue" id="search" @blur="$emit('do-search', searchValue)">
+    <input 
+      type="text" 
+      v-model="searchValue" 
+      id="search" 
+      @blur="doSearch"
+      data-testid="search-input"
+    >
     <button>Buscar</button>
   </section>
 </template>
@@ -11,6 +17,11 @@ export default {
   data: function () {
     return {
       searchValue: "",
+    }
+  },
+  methods: {
+    doSearch() {
+      this.$store.dispatch('fetchPokemon', {pokemonName: this.searchValue})
     }
   }
 }
