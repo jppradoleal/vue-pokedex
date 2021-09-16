@@ -5,6 +5,7 @@
       v-model="searchValue" 
       id="search" 
       @blur="doSearch"
+      placeholder="Busque um pokémon"
       data-testid="search-input"
     >
     <button>Buscar</button>
