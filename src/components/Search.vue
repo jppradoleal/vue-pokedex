@@ -25,7 +25,7 @@ export default {
     button {
       padding: 5px 25px;
       
-      background-color: #f0f;
+      background-color: var(--pink);
       color: white;
       border-radius: 0 5px 5px 0;
       border: none;

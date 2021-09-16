@@ -33,12 +33,12 @@ export default {
     flex-direction: column;
     max-width: 310px;
     align-items: center;
+    padding: 25px;
 
     background-color: #222;
-    padding: 25px;
     color: white;
     border-radius: 5px;
-    border: 4px solid #f0f;
+    border: 4px solid var(--pink);
     
     font-family: sans-serif;
     
@@ -53,10 +53,10 @@ export default {
       align-self: flex-start;
       
       span {
-        padding: 5px 25px;
+        padding: 5px 20px;
         
         border-radius: 5px;
-        background-color: #f0f;
+        background-color: var(--pink);
       }
     }
     
